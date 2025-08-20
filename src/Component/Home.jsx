@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { FaRupeeSign, FaShoppingCart, FaStar } from "react-icons/fa";
-import { useCart } from "../context/cart";
+import { useCart } from "../context/Cart";
 
 export const Home = () => {
   const [categories, setCatgeories] = useState([]);
