@@ -6,7 +6,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useAuth } from "../context/auth";
 import { NavDropdown } from "react-bootstrap";
 import { Adminmenu } from "../Admin/Adminmenu";
-import { useCart } from "../context/cart";
+import { useCart } from "../context/Cart";
 
 export const Header = () => {
   const { auth, setAuth } = useAuth();
