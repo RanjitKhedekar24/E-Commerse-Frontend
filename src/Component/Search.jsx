@@ -4,7 +4,7 @@ import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { FaRupeeSign } from "react-icons/fa";
-import { useCart } from "../context/cart";
+import { useCart } from "../context/Cart";
 export const Search = () => {
   const [values, setValues] = useSearch();
   const [cart, setCart] = useCart();

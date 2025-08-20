@@ -1,5 +1,5 @@
 import React from "react";
-import { useCart } from "../context/cart";
+import { useCart } from "../context/Cart";
 import { useAuth } from "../context/auth";
 import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/esm/Button";
