@@ -26,7 +26,9 @@ export const Product = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:2443/product/all-product");
+      const response = await fetch(
+        "https://e-commerse-backend-ig4l.onrender.com/product/all-product"
+      );
       const data = await response.json();
       setProds(data.products || []);
     } catch (error) {
@@ -65,7 +67,7 @@ export const Product = () => {
       return;
     try {
       const response = await fetch(
-        `http://localhost:2443/product/delete-product/${pid}`,
+        `https://e-commerse-backend-ig4l.onrender.com/product/delete-product/${pid}`,
         {
           method: "DELETE",
         }
@@ -132,7 +134,7 @@ export const Product = () => {
                 >
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:2443/product/product-photo/${product._id}`}
+                    src={`https://e-commerse-backend-ig4l.onrender.com/product/product-photo/${product._id}`}
                     className="img-fluid p-3"
                     style={{ maxHeight: "180px", objectFit: "contain" }}
                     alt={product.name}

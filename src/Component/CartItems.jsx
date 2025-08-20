@@ -1,186 +1,3 @@
-// import React from "react";
-// import { useCart } from "../context/cart";
-// import { useAuth } from "../context/auth";
-// import Container from "react-bootstrap/esm/Container";
-// import Button from "react-bootstrap/esm/Button";
-// import { FaRupeeSign } from "react-icons/fa";
-// export const CartItems = () => {
-//   const [cart, setCart] = useCart();
-//   const auth= useAuth();
-//   const gettotal = () => {
-//     let total = 0;
-//     cart.map((item) => {
-//       total = total + item.price;
-//     });
-//     return total;
-//   };
-//   function removecartitem(cid) {
-//     let myCart = [...cart];
-//     let index = myCart.findIndex((item) => item._id === cid);
-//     myCart.splice(index, 1);
-//     setCart(myCart);
-//     localStorage.setItem("cart", JSON.stringify(myCart));
-//   }
-//   return (
-//     <div>
-//       <Container className="text-center mt-4">
-//         <h2>{`Hello!!! ${auth.token && auth.user.name}`}</h2>
-//         {/* <h2>Hello!!! {auth?.token && auth?.user?.name}</h2> */}
-
-//         <h4>
-          
-//           {cart.length > 1
-//             ? `You have ${cart.length} products in your cart`
-//             : "Please login to check your cart"}
-          
-//         </h4>
-//         {auth?.token ? (
-//           <>
-//             <table className="table">
-//               <thead>
-//                 <tr>
-//                   <th>Image</th>
-//                   <th>Product Name</th>
-//                   <th>Price</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {cart.map((c) => {
-//                   return (
-//                     <tr>
-//                       <td>
-//                         <img
-//                           src={`http://localhost:2443/product/product-photo/${c._id}`}
-//                           height={80}
-//                           width={80}
-//                           alt=""
-//                         />
-//                       </td>
-//                       <td>{c.name}</td>
-//                       <td>
-//                         <FaRupeeSign /> {c.price}
-//                       </td>
-//                       <td>
-//                         <Button
-//                           variant="danger"
-//                           onClick={() => removecartitem(c._id)}
-//                         >
-//                           Remove
-//                         </Button>
-//                       </td>
-//                     </tr>
-//                   );
-//                 })}
-//               </tbody>
-//               <tfoot>
-//                 <tr>
-//                   <td colSpan={2}>Total Price: </td>
-//                   <td colSpan={2}>
-//                     <FaRupeeSign /> {gettotal()}
-//                   </td>
-//                 </tr>
-//               </tfoot>
-//             </table>
-//           </>
-//         ) : null}
-//       </Container>
-//     </div>
-//   );
-// // };
-// import React from "react";
-// import { useCart } from "../context/cart";
-// import { useAuth } from "../context/auth";
-// import Container from "react-bootstrap/esm/Container";
-// import Button from "react-bootstrap/esm/Button";
-// import { FaRupeeSign } from "react-icons/fa";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// // Initialize toast container (add this once in App.jsx root)
-// import { ToastContainer } from "react-toastify";
-
-// export const CartItems = () => {
-//   const [cart, setCart] = useCart();
-//   const auth = useAuth();
-
-//   // Calculate total price
-//   const getTotal = () => {
-//     return cart.reduce((acc, item) => acc + item.price, 0);
-//   };
-
-//   // Remove item from cart
-//   const removeCartItem = (cid) => {
-//     const updatedCart = cart.filter((item) => item._id !== cid);
-//     setCart(updatedCart);
-//     localStorage.setItem("cart", JSON.stringify(updatedCart));
-//     toast.success("🗑️ Item removed from cart!");
-//   };
-
-//   return (
-//     <div>
-//       <Container className="text-center mt-4">
-//         <h2>Hello, {auth?.user?.name} 👋</h2>
-
-//         <h4>
-//           You have {cart.length} product{cart.length !== 1 ? "s" : ""} in your cart
-//         </h4>
-
-//         {cart.length > 0 ? (
-//           <table className="table">
-//             <thead>
-//               <tr>
-//                 <th>Image</th>
-//                 <th>Product Name</th>
-//                 <th>Price</th>
-//                 <th>Action</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {cart.map((c) => (
-//                 <tr key={c._id}>
-//                   <td>
-//                     <img
-//                       src={`http://localhost:2443/product/product-photo/${c._id}`}
-//                       height={80}
-//                       width={80}
-//                       alt={c.name}
-//                     />
-//                   </td>
-//                   <td>{c.name}</td>
-//                   <td>
-//                     <FaRupeeSign /> {c.price}
-//                   </td>
-//                   <td>
-//                     <Button
-//                       variant="danger"
-//                       onClick={() => removeCartItem(c._id)}
-//                     >
-//                       Remove
-//                     </Button>
-//                   </td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//             <tfoot>
-//               <tr>
-//                 <td colSpan={2}>Total Price:</td>
-//                 <td colSpan={2}>
-//                   <FaRupeeSign /> {getTotal()}
-//                 </td>
-//               </tr>
-//             </tfoot>
-//           </table>
-//         ) : (
-//           <p className="mt-3">🛒 Your cart is empty!</p>
-//         )}
-//       </Container>
-
-//       {/* Toast container (place it here or inside App.jsx) */}
-//       <ToastContainer position="top-right" autoClose={2000} />
-//     </div>
-//   );
-// };
-
 import React from "react";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
@@ -215,7 +32,7 @@ export const CartItems = () => {
   const removeCartItem = (cid) => {
     // Find the index of the first occurrence of the item
     const index = cart.findIndex((item) => item._id === cid);
-    
+
     if (index !== -1) {
       const updatedCart = [...cart];
       updatedCart.splice(index, 1); // Remove only one instance
@@ -239,7 +56,8 @@ export const CartItems = () => {
         <h2>Hello, {auth?.user?.name} 👋</h2>
 
         <h4>
-          You have {cart.length} product{cart.length !== 1 ? "s" : ""} in your cart
+          You have {cart.length} product{cart.length !== 1 ? "s" : ""} in your
+          cart
         </h4>
 
         {cart.length > 0 ? (
@@ -259,7 +77,7 @@ export const CartItems = () => {
                 <tr key={item._id}>
                   <td>
                     <img
-                      src={`http://localhost:2443/product/product-photo/${item._id}`}
+                      src={`https://e-commerse-backend-ig4l.onrender.com/product/product-photo/${item._id}`}
                       height={80}
                       width={80}
                       alt={item.name}

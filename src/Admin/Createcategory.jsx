@@ -36,7 +36,7 @@ export const Createcategory = () => {
     setFormLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:2443/category/create-category",
+        "https://e-commerse-backend-ig4l.onrender.com/category/create-category",
         { name },
         {
           headers: {
@@ -71,7 +71,7 @@ export const Createcategory = () => {
     setFormLoading(true);
     try {
       const { data } = await axios.put(
-        `http://localhost:2443/category/update-category/${selectedCategory._id}`,
+        `https://e-commerse-backend-ig4l.onrender.com/category/update-category/${selectedCategory._id}`,
         { name: editName },
         {
           headers: {
@@ -100,7 +100,7 @@ export const Createcategory = () => {
     setFormLoading(true);
     try {
       const { data } = await axios.delete(
-        `http://localhost:2443/category/delete-category/${selectedCategory._id}`,
+        `https://e-commerse-backend-ig4l.onrender.com/category/delete-category/${selectedCategory._id}`,
         {
           headers: {
             Authorization: auth?.token,
@@ -128,7 +128,7 @@ export const Createcategory = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        "http://localhost:2443/category/all-category"
+        "https://e-commerse-backend-ig4l.onrender.com/category/all-category"
       );
       setCategories(res.data.categories || []);
     } catch (err) {

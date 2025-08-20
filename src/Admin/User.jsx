@@ -10,7 +10,9 @@ export const User = () => {
   // Fetch all users
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:2443/auth/allusers");
+      const res = await fetch(
+        "https://e-commerse-backend-ig4l.onrender.com/auth/allusers"
+      );
       const data = await res.json();
 
       if (data.success) {
@@ -95,7 +97,7 @@ export const User = () => {
 //   const auth = useAuth();
 //   const getusers = async () => {
 //     try {
-//       const res = await fetch("http://localhost:2443/auth/allusers").then(
+//       const res = await fetch("https://e-commerse-backend-ig4l.onrender.com/auth/allusers").then(
 //         (data) =>
 //           data.json().then((data) => {
 //             setUsers(data.users);

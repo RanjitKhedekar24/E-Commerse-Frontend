@@ -7,7 +7,7 @@ export const PrivateRouter = () => {
   const { auth, setAuth } = useAuth();
   useEffect(() => {
     const authCheck = () => {
-      fetch("http://localhost:2443/auth/userauth", {
+      fetch("https://e-commerse-backend-ig4l.onrender.com/auth/userauth", {
         headers: { authorization: auth?.token },
       }).then((res) => {
         res.json().then((data) => {
@@ -24,5 +24,5 @@ export const PrivateRouter = () => {
       authCheck();
     }
   }, [auth.token]);
-  return ok?<Outlet/>:null;
+  return ok ? <Outlet /> : null;
 };

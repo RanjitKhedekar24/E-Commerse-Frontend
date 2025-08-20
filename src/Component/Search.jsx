@@ -27,7 +27,7 @@ export const Search = () => {
               >
                 <Card.Img
                   variant="top"
-                  src={`http://localhost:2443/product/product-photo/${p._id}`}
+                  src={`https://e-commerse-backend-ig4l.onrender.com/product/product-photo/${p._id}`}
                   className="h-50 w-50 mx-auto d-block"
                 />
                 <Card.Body>

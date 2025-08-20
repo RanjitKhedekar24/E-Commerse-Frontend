@@ -24,14 +24,16 @@ export const CreateProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
-  
+
   const auth = useAuth();
   const navigate = useNavigate();
 
   const getallcategories = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:2443/category/all-category");
+      const response = await fetch(
+        "https://e-commerse-backend-ig4l.onrender.com/category/all-category"
+      );
       const data = await response.json();
       setCategories(data.categories || []);
       if (data.categories?.length > 0) {
@@ -51,14 +53,16 @@ export const CreateProduct = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!name.trim()) newErrors.name = "Product name is required";
-    if (!price || isNaN(price) || price <= 0) newErrors.price = "Valid price is required";
+    if (!price || isNaN(price) || price <= 0)
+      newErrors.price = "Valid price is required";
     if (!description.trim()) newErrors.description = "Description is required";
-    if (!quantity || isNaN(quantity) || quantity < 0) newErrors.quantity = "Valid quantity is required";
+    if (!quantity || isNaN(quantity) || quantity < 0)
+      newErrors.quantity = "Valid quantity is required";
     if (!category) newErrors.category = "Category is required";
     if (!photo) newErrors.photo = "Product image is required";
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -67,7 +71,7 @@ export const CreateProduct = () => {
     const file = e.target.files[0];
     if (file) {
       setPhoto(file);
-      
+
       // Create preview
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -79,14 +83,14 @@ export const CreateProduct = () => {
 
   const addproduct = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       toast.error("Please fix form errors");
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       const prod = new FormData();
       prod.append("name", name);
@@ -95,17 +99,20 @@ export const CreateProduct = () => {
       prod.append("quantity", quantity);
       prod.append("category", category);
       prod.append("photo", photo);
-      
-      const response = await fetch("http://localhost:2443/product/create-product", {
-        method: "POST",
-        headers: {
-          Authorization: auth?.token,
-        },
-        body: prod,
-      });
-      
+
+      const response = await fetch(
+        "https://e-commerse-backend-ig4l.onrender.com/product/create-product",
+        {
+          method: "POST",
+          headers: {
+            Authorization: auth?.token,
+          },
+          body: prod,
+        }
+      );
+
       const data = await response.json();
-      
+
       if (response.ok) {
         toast.success("Product created successfully!");
         navigate("/dashboard/admin/products");
@@ -123,15 +130,15 @@ export const CreateProduct = () => {
   return (
     <Container className="py-4">
       <ToastContainer position="top-right" autoClose={3000} />
-      
-      <Button 
-        variant="outline-primary" 
+
+      <Button
+        variant="outline-primary"
         className="mb-4 d-flex align-items-center"
         onClick={() => navigate(-1)}
       >
         <FaArrowLeft className="me-2" /> Back to Products
       </Button>
-      
+
       <Row className="justify-content-center">
         <Col xs={12} md={10} lg={8}>
           <Card className="shadow-sm border-0 rounded-3">
@@ -141,7 +148,7 @@ export const CreateProduct = () => {
                 <h4 className="mb-0">Create New Product</h4>
               </div>
             </Card.Header>
-            
+
             <Card.Body className="p-4">
               <Form onSubmit={addproduct}>
                 <Row>
@@ -151,12 +158,16 @@ export const CreateProduct = () => {
                       <Form.Label className="fw-semibold">Category</Form.Label>
                       {isLoading ? (
                         <div className="d-flex align-items-center">
-                          <Spinner animation="border" size="sm" className="me-2" />
+                          <Spinner
+                            animation="border"
+                            size="sm"
+                            className="me-2"
+                          />
                           <span>Loading categories...</span>
                         </div>
                       ) : (
                         <>
-                          <Form.Select 
+                          <Form.Select
                             className={`${errors.category ? "is-invalid" : ""}`}
                             name="category"
                             value={category}
@@ -169,14 +180,18 @@ export const CreateProduct = () => {
                             ))}
                           </Form.Select>
                           {errors.category && (
-                            <Form.Text className="text-danger">{errors.category}</Form.Text>
+                            <Form.Text className="text-danger">
+                              {errors.category}
+                            </Form.Text>
                           )}
                         </>
                       )}
                     </Form.Group>
-                    
+
                     <Form.Group className="mb-4">
-                      <Form.Label className="fw-semibold">Product Name</Form.Label>
+                      <Form.Label className="fw-semibold">
+                        Product Name
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter product name"
@@ -185,12 +200,16 @@ export const CreateProduct = () => {
                         isInvalid={!!errors.name}
                       />
                       {errors.name && (
-                        <Form.Text className="text-danger">{errors.name}</Form.Text>
+                        <Form.Text className="text-danger">
+                          {errors.name}
+                        </Form.Text>
                       )}
                     </Form.Group>
-                    
+
                     <Form.Group className="mb-4">
-                      <Form.Label className="fw-semibold">Description</Form.Label>
+                      <Form.Label className="fw-semibold">
+                        Description
+                      </Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={3}
@@ -200,14 +219,18 @@ export const CreateProduct = () => {
                         isInvalid={!!errors.description}
                       />
                       {errors.description && (
-                        <Form.Text className="text-danger">{errors.description}</Form.Text>
+                        <Form.Text className="text-danger">
+                          {errors.description}
+                        </Form.Text>
                       )}
                     </Form.Group>
-                    
+
                     <Row>
                       <Col md={6}>
                         <Form.Group className="mb-4">
-                          <Form.Label className="fw-semibold">Price (₹)</Form.Label>
+                          <Form.Label className="fw-semibold">
+                            Price (₹)
+                          </Form.Label>
                           <Form.Control
                             type="number"
                             placeholder="Enter price"
@@ -216,13 +239,17 @@ export const CreateProduct = () => {
                             isInvalid={!!errors.price}
                           />
                           {errors.price && (
-                            <Form.Text className="text-danger">{errors.price}</Form.Text>
+                            <Form.Text className="text-danger">
+                              {errors.price}
+                            </Form.Text>
                           )}
                         </Form.Group>
                       </Col>
                       <Col md={6}>
                         <Form.Group className="mb-4">
-                          <Form.Label className="fw-semibold">Quantity</Form.Label>
+                          <Form.Label className="fw-semibold">
+                            Quantity
+                          </Form.Label>
                           <Form.Control
                             type="number"
                             placeholder="Enter quantity"
@@ -231,30 +258,34 @@ export const CreateProduct = () => {
                             isInvalid={!!errors.quantity}
                           />
                           {errors.quantity && (
-                            <Form.Text className="text-danger">{errors.quantity}</Form.Text>
+                            <Form.Text className="text-danger">
+                              {errors.quantity}
+                            </Form.Text>
                           )}
                         </Form.Group>
                       </Col>
                     </Row>
                   </Col>
-                  
+
                   {/* Right Column - Image Upload */}
                   <Col md={5}>
                     <Form.Group className="mb-4">
-                      <Form.Label className="fw-semibold d-block">Product Image</Form.Label>
-                      
+                      <Form.Label className="fw-semibold d-block">
+                        Product Image
+                      </Form.Label>
+
                       <div className="d-flex flex-column align-items-center">
                         {photoPreview ? (
                           <div className="mb-3 position-relative">
-                            <img 
-                              src={photoPreview} 
-                              alt="Preview" 
+                            <img
+                              src={photoPreview}
+                              alt="Preview"
                               className="img-fluid rounded border"
                               style={{ maxHeight: "200px" }}
                             />
-                            <Button 
-                              variant="danger" 
-                              size="sm" 
+                            <Button
+                              variant="danger"
+                              size="sm"
                               className="position-absolute top-0 end-0 m-1"
                               onClick={() => {
                                 setPhoto(null);
@@ -267,10 +298,12 @@ export const CreateProduct = () => {
                         ) : (
                           <div className="bg-light border rounded d-flex flex-column align-items-center justify-content-center p-5 w-100 mb-3">
                             <FaImage className="fs-1 text-muted mb-2" />
-                            <span className="text-muted">No image selected</span>
+                            <span className="text-muted">
+                              No image selected
+                            </span>
                           </div>
                         )}
-                        
+
                         <div className="w-100">
                           <Form.Control
                             type="file"
@@ -281,14 +314,16 @@ export const CreateProduct = () => {
                             className="d-none"
                             id="product-image-upload"
                           />
-                          <label 
-                            htmlFor="product-image-upload" 
+                          <label
+                            htmlFor="product-image-upload"
                             className="btn btn-outline-primary w-100"
                           >
                             Choose Image
                           </label>
                           {errors.photo && (
-                            <Form.Text className="text-danger d-block">{errors.photo}</Form.Text>
+                            <Form.Text className="text-danger d-block">
+                              {errors.photo}
+                            </Form.Text>
                           )}
                           <Form.Text className="text-muted d-block mt-1">
                             Recommended size: 800x800px, JPG/PNG format
@@ -296,18 +331,22 @@ export const CreateProduct = () => {
                         </div>
                       </div>
                     </Form.Group>
-                    
+
                     <div className="d-grid mt-4">
-                      <Button 
-                        variant="primary" 
-                        type="submit" 
+                      <Button
+                        variant="primary"
+                        type="submit"
                         size="lg"
                         disabled={isSubmitting}
                         className="d-flex align-items-center justify-content-center"
                       >
                         {isSubmitting ? (
                           <>
-                            <Spinner animation="border" size="sm" className="me-2" />
+                            <Spinner
+                              animation="border"
+                              size="sm"
+                              className="me-2"
+                            />
                             Creating Product...
                           </>
                         ) : (

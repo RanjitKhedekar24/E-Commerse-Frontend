@@ -32,11 +32,14 @@ export const ForgotPassword = () => {
     setMsg("");
 
     try {
-      const response = await fetch("http://localhost:2443/auth/forgotpass", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, newPassword, answer }),
-      });
+      const response = await fetch(
+        "https://e-commerse-backend-ig4l.onrender.com/auth/forgotpass",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, newPassword, answer }),
+        }
+      );
 
       const data = await response.json();
 

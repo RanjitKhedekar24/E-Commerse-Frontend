@@ -18,11 +18,14 @@ export const SignIn = () => {
     const user = { email, password };
 
     try {
-      const res = await fetch("http://localhost:2443/auth/signIn", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
+      const res = await fetch(
+        "https://e-commerse-backend-ig4l.onrender.com/auth/signIn",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        }
+      );
 
       const data = await res.json();
       console.log(data);

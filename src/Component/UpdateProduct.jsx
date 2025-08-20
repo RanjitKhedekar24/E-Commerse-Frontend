@@ -34,7 +34,7 @@ export const UpdateProduct = () => {
   const getCategories = async () => {
     try {
       const response = await fetch(
-        "http://localhost:2443/category/all-category"
+        "https://e-commerse-backend-ig4l.onrender.com/category/all-category"
       );
       const data = await response.json();
       setCategories(data.categories);
@@ -48,7 +48,7 @@ export const UpdateProduct = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:2443/product/single-product/${params.id}`
+        `https://e-commerse-backend-ig4l.onrender.com/product/single-product/${params.id}`
       );
       const data = await response.json();
 
@@ -61,7 +61,7 @@ export const UpdateProduct = () => {
         setCategory(product.category._id);
         setId(product._id);
         setExistingImage(
-          `http://localhost:2443/product/product-photo/${product._id}`
+          `https://e-commerse-backend-ig4l.onrender.com/product/product-photo/${product._id}`
         );
       } else {
         setError("Failed to fetch product details");
@@ -97,7 +97,7 @@ export const UpdateProduct = () => {
       }
 
       const response = await fetch(
-        `http://localhost:2443/product/update-product/${id}`,
+        `https://e-commerse-backend-ig4l.onrender.com/product/update-product/${id}`,
         {
           method: "PUT",
           headers: {
@@ -128,7 +128,7 @@ export const UpdateProduct = () => {
   const deleteProduct = async () => {
     try {
       const response = await fetch(
-        `http://localhost:2443/product/product-delete/${id}`,
+        `https://e-commerse-backend-ig4l.onrender.com/product/product-delete/${id}`,
         {
           method: "DELETE",
           headers: {

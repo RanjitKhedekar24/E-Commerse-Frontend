@@ -15,7 +15,9 @@ export const Home = () => {
   const [cart, setCart] = useCart();
 
   function getallcategories() {
-    fetch("http://localhost:2443/category/all-category").then((res1) => {
+    fetch(
+      "https://e-commerse-backend-ig4l.onrender.com/category/all-category"
+    ).then((res1) => {
       res1.json().then((res2) => {
         setCatgeories(res2.categories);
       });
@@ -27,7 +29,9 @@ export const Home = () => {
   }, []);
 
   function getallproducts() {
-    fetch("http://localhost:2443/product/all-product").then((res1) => {
+    fetch(
+      "https://e-commerse-backend-ig4l.onrender.com/product/all-product"
+    ).then((res1) => {
       res1.json().then((res2) => {
         setProds(res2.products);
       });
@@ -50,13 +54,16 @@ export const Home = () => {
 
   function filterProduct() {
     let data = { checked };
-    fetch("http://localhost:2443/product/filter-product", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((res1) => {
+    fetch(
+      "https://e-commerse-backend-ig4l.onrender.com/product/filter-product",
+      {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    ).then((res1) => {
       res1.json().then((res2) => {
         setProds(res2.products);
       });
@@ -111,7 +118,7 @@ export const Home = () => {
                     >
                       <Card.Img
                         variant="top"
-                        src={`http://localhost:2443/product/product-photo/${p._id}`}
+                        src={`https://e-commerse-backend-ig4l.onrender.com/product/product-photo/${p._id}`}
                         className="img-fluid p-3"
                         style={{ maxHeight: "180px", objectFit: "contain" }}
                         alt={p.name}

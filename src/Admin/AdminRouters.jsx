@@ -7,7 +7,7 @@ export const AdminRouter = () => {
   const { auth, setAuth } = useAuth();
   useEffect(() => {
     const authCheck = () => {
-      fetch("http://localhost:2443/auth/adminauth", {
+      fetch("https://e-commerse-backend-ig4l.onrender.com/auth/adminauth", {
         headers: { authorization: auth?.token },
       }).then((res) => {
         res.json().then((data) => {

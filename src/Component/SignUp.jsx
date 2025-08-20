@@ -5,7 +5,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { InputGroup } from "react-bootstrap";
 import { useAuth } from "../context/auth";
 
-
 export const SignUp = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -14,7 +13,7 @@ export const SignUp = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [answer, setAnswer] = useState("");
-  const { auth, setAuth } = useAuth()
+  const { auth, setAuth } = useAuth();
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState(""); // success | danger
   const [showPassword, setShowPassword] = useState(false);
@@ -24,11 +23,14 @@ export const SignUp = () => {
     const user = { name, email, password, address, phone, answer };
 
     try {
-      const res = await fetch("http://localhost:2443/auth/signUp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
+      const res = await fetch(
+        "https://e-commerse-backend-ig4l.onrender.com/auth/signUp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        }
+      );
 
       const data = await res.json();
       console.log(data);
