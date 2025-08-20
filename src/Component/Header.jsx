@@ -10,7 +10,7 @@ import { useCart } from "../context/cart";
 
 export const Header = () => {
   const { auth, setAuth } = useAuth();
-  const [cart] = useCart();
+  const cart = useCart();
 
   const handleSignOut = () => {
     localStorage.removeItem("auth");
